@@ -37,7 +37,7 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Component;
 
 public class PanelSymmetric extends JPanel {
-	
+
 	private final ButtonGroup btnGroupModel = new ButtonGroup();
 	private SymmetricController controller = new SymmetricController(this);
 	private JButton btnKey;
@@ -66,6 +66,8 @@ public class PanelSymmetric extends JPanel {
 	private JTextArea taMessageStatus;
 	private final ButtonGroup buttonGroupModelFile = new ButtonGroup();
 	private JPanel panel_3_2;
+	private JRadioButton rdoBouncycastlt;
+	private JRadioButton rdoBouncycastlt_1;
 
 	public PanelSymmetric() {
 
@@ -126,7 +128,13 @@ public class PanelSymmetric extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				mode = String.valueOf(cbxAlgorithm.getSelectedItem());
-				controller.loadDataAllOption(mode);
+
+				if (rdoBouncycastlt.isSelected()) {
+					controller.loadDataAllOption(mode, "Bouncy Castle");
+				} else {
+					controller.loadDataAllOption(mode, "normal");
+				}
+
 			}
 		});
 		cbxAlgorithm.setBounds(107, 19, 108, 22);
@@ -163,7 +171,7 @@ public class PanelSymmetric extends JPanel {
 		panel_2.add(cbxPadding);
 
 		JButton btnStart = new JButton("Run");
-		
+
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -183,11 +191,18 @@ public class PanelSymmetric extends JPanel {
 						if (button.isSelected())
 							opti = button.getText();
 					}
+					String lib;
+					if (rdoBouncycastlt.isSelected()) {
+						lib = "Bouncy Castle";
+					} else {
+						lib = "normal";
+					}
 					if (opti == "Encrypt") {
-						String encrypt = controller.encrypt(algorithms, message, mode, padding);
+
+						String encrypt = controller.encrypt(algorithms, message, mode, padding, lib);
 						taResult.setText(encrypt);
 					} else if (opti == "Decrypt") {
-						String decrypt = controller.decrypt(algorithms, message, mode, padding);
+						String decrypt = controller.decrypt(algorithms, message, mode, padding, lib);
 						taResult.setText(decrypt);
 					}
 
@@ -201,7 +216,7 @@ public class PanelSymmetric extends JPanel {
 		});
 		btnStart.setBounds(204, 258, 89, 23);
 		panelString.add(btnStart);
-	//	btnStart.setIcon(new ImageIcon("D:\\OneDrive\\Desktop\\start.png"));
+		// btnStart.setIcon(new ImageIcon("D:\\OneDrive\\Desktop\\start.png"));
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(
 				new TitledBorder(null, "Input", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(186, 85, 211)));
@@ -241,7 +256,7 @@ public class PanelSymmetric extends JPanel {
 		btnKey = new JButton("Key");
 		btnKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String mode = cbxAlgorithm.getSelectedItem().toString().trim();
 				controller.openDialogKey(mode);
 
@@ -290,6 +305,24 @@ public class PanelSymmetric extends JPanel {
 		});
 		btnOpen.setBounds(338, 22, 76, 23);
 		panelString.add(btnOpen);
+
+		rdoBouncycastlt = new JRadioButton("Bouncy Castle");
+		rdoBouncycastlt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+//				modeFile = String.valueOf(cbxAlgorithmFile.getSelectedItem());
+//				controller.loadDataAllOption(modeFile);
+
+				if (rdoBouncycastlt.isSelected()) {
+					controller.loadDataAlgorithms("Bouncy Castle");
+				} else {
+					controller.loadDataAlgorithms("normal");
+				}
+			}
+		});
+		rdoBouncycastlt.setBackground(Color.WHITE);
+		rdoBouncycastlt.setBounds(20, 256, 117, 23);
+		panelString.add(rdoBouncycastlt);
 
 		JPanel panelFile = new JPanel();
 		panelFile.setBounds(67, 11, 59, 21);
@@ -341,7 +374,13 @@ public class PanelSymmetric extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				modeFile = String.valueOf(cbxAlgorithmFile.getSelectedItem());
-				controller.loadDataAllOption(modeFile);
+
+				if (rdoBouncycastlt_1.isSelected()) {
+					controller.loadDataAllOption(mode, "Bouncy Castle");
+				} else {
+					controller.loadDataAllOption(mode, "normal");
+				}
+
 
 			}
 		});
@@ -380,7 +419,9 @@ public class PanelSymmetric extends JPanel {
 
 		panel_3_2 = new JPanel();
 		panel_3_2.setLayout(null);
-		panel_3_2.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Status", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(65, 105, 225)));
+		panel_3_2.setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Status",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(65, 105, 225)));
 		panel_3_2.setBackground(Color.WHITE);
 		panel_3_2.setBounds(259, 74, 233, 87);
 		panelFile.add(panel_3_2);
@@ -446,11 +487,19 @@ public class PanelSymmetric extends JPanel {
 						if (button.isSelected())
 							opti = button.getText();
 					}
+
+					String lib;
+					if (rdoBouncycastlt_1.isSelected()) {
+						lib = "Bouncy Castle";
+					} else {
+						lib = "normal";
+					}
+
 					if (opti == "Encrypt") {
-						controller.encryptFile(algorithms, mode, padding);
+						controller.encryptFile(algorithms, mode, padding,lib);
 
 					} else if (opti == "Decrypt") {
-						controller.decryptFile(algorithms, mode, padding);
+						controller.decryptFile(algorithms, mode, padding,lib);
 					}
 
 				} catch (Exception e1) {
@@ -464,7 +513,23 @@ public class PanelSymmetric extends JPanel {
 		btnStart_1.setBounds(204, 258, 89, 23);
 		panelFile.add(btnStart_1);
 
-		controller.loadDataAlgorithms();
+		rdoBouncycastlt_1 = new JRadioButton("Bouncy Castle");
+		rdoBouncycastlt_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (rdoBouncycastlt_1.isSelected()) {
+					controller.loadDataAlgorithms("Bouncy Castle");
+				} else {
+					controller.loadDataAlgorithms("normal");
+				}
+
+			}
+		});
+		rdoBouncycastlt_1.setBackground(Color.WHITE);
+		rdoBouncycastlt_1.setBounds(20, 256, 117, 23);
+		panelFile.add(rdoBouncycastlt_1);
+
+		controller.loadDataAlgorithms("normal");
 	}
 
 	public void setColorKeyButton() {
@@ -478,17 +543,21 @@ public class PanelSymmetric extends JPanel {
 		btnKeyFile.setBackground(Color.GREEN);
 
 	}
+
 	public void setColorButtonOpen() {
 		btnOpenFile.setBackground(Color.GREEN);
 	}
+
 	public void setColorButtonSave() {
 		btnSaveFile.setBackground(Color.GREEN);
 	}
+
 	public void setColorButtonOpenNor() {
-		btnOpenFile.setBackground(new Color(240,240,240));
+		btnOpenFile.setBackground(new Color(240, 240, 240));
 	}
+
 	public void setColorButtonSaveNor() {
-		btnSaveFile.setBackground(new Color(240,240,240));
+		btnSaveFile.setBackground(new Color(240, 240, 240));
 	}
 
 	public void setStatus(String message) {

@@ -28,15 +28,15 @@ public class MainView extends JFrame {
 	private final JPanel panelMenu = new JPanel();
 
 	private Image img_logo = new ImageIcon(MainView.class.getResource("/asset/iconSecurity.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-	
+
 	private PanelSymmetric panelSymmetric;
 	private PanelAsymmetric panelAsymmetric;
 	private PanelSessionKey panelGenkeyPair;
 	private PanelGenKeyPair panelSessionKey;
 	private PanelHash panelHash;
 	private PanelPBE panelPBE;
-	
-	
+
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,7 +58,7 @@ public class MainView extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		setResizable(false);
-	//	setBounds(100, 100, 711, 418);
+		//	setBounds(100, 100, 711, 418);
 		setBounds(100, 100, 650, 350);
 		//setLocation(deDimension.width/2-getWidth()/2,deDimension.height/2-getHeight()/2 );
 		setLocationRelativeTo(null);
@@ -72,7 +72,7 @@ public class MainView extends JFrame {
 		panelMenu.setForeground(Color.CYAN);
 		contentPane.add(panelMenu);
 		panelMenu.setLayout(null);
-		
+
 		// Panel Symmetric
 		panelSymmetric = new PanelSymmetric();
 //		panelSymmetric.setBounds(0, 0, 420, 311);
@@ -83,37 +83,37 @@ public class MainView extends JFrame {
 		panelSessionKey = new PanelGenKeyPair();
 		panelHash = new PanelHash();
 		panelPBE = new PanelPBE();
-		
-		
-		
+
+
+
 		JLabel lblIcon = new JLabel("");
 		lblIcon.setBounds(20, 11, 106, 78);
 		lblIcon.setIcon(new ImageIcon(img_logo));
 		panelMenu.add(lblIcon);
-		
+
 		// Jpanel Symmetric
 		JPanel panelSymetric = new JPanel();
 		panelSymetric.addMouseListener(new PanelButtonMouseAdapter(panelSymetric) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				menuClick(panelSymmetric);
-				
+
 			}
 		});
 		panelSymetric.setBackground(SystemColor.controlDkShadow);
 		panelSymetric.setBounds(10, 100, 106, 24);
 		panelMenu.add(panelSymetric);
 		panelSymetric.setLayout(null);
-		
-		
-	
+
+
+
 		JLabel lblNewLabel = new JLabel("Symmetric");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setForeground(SystemColor.text);
 		lblNewLabel.setBounds(20, 5, 66, 14);
 		panelSymetric.add(lblNewLabel);
-		
+
 		// Jpanel Asymmetric
 		JPanel panelAsymetric = new JPanel();
 		panelAsymetric.addMouseListener(new PanelButtonMouseAdapter(panelAsymetric){
@@ -125,13 +125,13 @@ public class MainView extends JFrame {
 		panelAsymetric.setBackground(SystemColor.controlDkShadow);
 		panelAsymetric.setBounds(10, 135, 106, 24);
 		panelMenu.add(panelAsymetric);
-		
+
 		JLabel lblAsymmetric = new JLabel("Asymmetric");
 		lblAsymmetric.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAsymmetric.setForeground(Color.WHITE);
 		lblAsymmetric.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panelAsymetric.add(lblAsymmetric);
-		
+
 		JPanel panGenkeyPair = new JPanel();
 		panGenkeyPair.addMouseListener(new PanelButtonMouseAdapter(panGenkeyPair){
 			@Override
@@ -142,16 +142,16 @@ public class MainView extends JFrame {
 		panGenkeyPair.setBackground(SystemColor.controlDkShadow);
 		panGenkeyPair.setBounds(10, 170, 106, 24);
 		panelMenu.add(panGenkeyPair);
-		
-		JLabel lblNewLabel_3 = new JLabel("Session Key");
-		
+
+		JLabel lblNewLabel_3 = new JLabel("Symmetric Key");
+
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setForeground(Color.WHITE);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panGenkeyPair.add(lblNewLabel_3);
-		
+
 		JPanel panelSessonKey = new JPanel();
-		
+
 		panelSessonKey.addMouseListener(new PanelButtonMouseAdapter(panelSessonKey){
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -161,13 +161,13 @@ public class MainView extends JFrame {
 		panelSessonKey.setBackground(SystemColor.controlDkShadow);
 		panelSessonKey.setBounds(10, 205, 106, 24);
 		panelMenu.add(panelSessonKey);
-		
-		JLabel lblNewLabel_2 = new JLabel("GenKey Pair");
+
+		JLabel lblNewLabel_2 = new JLabel("Asymmetric Key");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(Color.WHITE);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panelSessonKey.add(lblNewLabel_2);
-		
+
 		JPanel paneHash = new JPanel();
 		paneHash.addMouseListener(new PanelButtonMouseAdapter(paneHash){
 			@Override
@@ -178,13 +178,13 @@ public class MainView extends JFrame {
 		paneHash.setBackground(SystemColor.controlDkShadow);
 		paneHash.setBounds(10, 240, 106, 24);
 		panelMenu.add(paneHash);
-		
+
 		JLabel lblNewLabel_2_1 = new JLabel("Hash");
 		lblNewLabel_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2_1.setForeground(Color.WHITE);
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		paneHash.add(lblNewLabel_2_1);
-		
+
 		JPanel panelSymetric_3_2 = new JPanel();
 		panelSymetric_3_2.addMouseListener(new PanelButtonMouseAdapter(panelSymetric_3_2){
 			@Override
@@ -195,19 +195,19 @@ public class MainView extends JFrame {
 		panelSymetric_3_2.setBackground(SystemColor.controlDkShadow);
 		panelSymetric_3_2.setBounds(10, 275, 106, 24);
 		panelMenu.add(panelSymetric_3_2);
-		
+
 		JLabel lblNewLabel_2_2 = new JLabel("PBE");
 		lblNewLabel_2_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2_2.setForeground(Color.WHITE);
 		lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panelSymetric_3_2.add(lblNewLabel_2_2);
-		
+
 		JPanel panelContent = new JPanel();
 		panelContent.setBounds(127, 0, 507, 311);
 		contentPane.add(panelContent);
 		panelContent.setLayout(null);
-		
-		
+
+
 		panelContent.add(panelSymmetric);
 		panelContent.add(panelAsymmetric);
 		panelContent.add(panelGenkeyPair);
@@ -224,17 +224,17 @@ public class MainView extends JFrame {
 		panelHash.setVisible(false);
 		panelPBE.setVisible(false);
 		jpanel.setVisible(true);
-		
+
 	}
 	private class PanelButtonMouseAdapter extends MouseAdapter {
-		
+
 		JPanel jpanel;
-		
+
 		public PanelButtonMouseAdapter(JPanel jPanel) {
 			// TODO Auto-generated constructor stub
 			this.jpanel = jPanel;
 		}
-		
+
 		@Override
 		public void mouseExited(MouseEvent e) {
 			jpanel.setBackground(SystemColor.controlDkShadow);
@@ -252,6 +252,6 @@ public class MainView extends JFrame {
 			jpanel.setBackground(new Color(0, 250, 154));
 		}
 	}
-	
+
 }
 
