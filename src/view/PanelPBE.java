@@ -11,11 +11,14 @@ import javax.swing.JRadioButton;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JComboBox;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
@@ -24,6 +27,8 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelPBE extends JPanel {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -111,7 +116,7 @@ public class PanelPBE extends JPanel {
 		panel_3_1.setBounds(254, 151, 233, 100);
 		add(panel_3_1);
 
-		 taResult = new JTextArea();
+		taResult = new JTextArea();
 		taResult.setLineWrap(true);
 		taResult.setEditable(false);
 		taResult.setBackground(Color.LIGHT_GRAY);
@@ -165,12 +170,12 @@ public class PanelPBE extends JPanel {
 		});
 		btnStart.setBounds(158, 262, 81, 23);
 		add(btnStart);
-		
+
 		JButton btnSaveFile = new JButton("Save");
 		btnSaveFile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String result = taResult.getText().toString().trim();
-				
+
 				try {
 					controller.saveDialogFile(result);
 				} catch (IOException e1) {
@@ -183,10 +188,29 @@ public class PanelPBE extends JPanel {
 		btnSaveFile.setBounds(254, 262, 76, 23);
 		add(btnSaveFile);
 
+		JLabel lblNewLabel_2_1 = new JLabel();
+		lblNewLabel_2_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/8.8.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+
+			}
+		});
+		Image img_help = new ImageIcon(MainView.class.getResource("/asset/help.jpg")).getImage()
+				.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		lblNewLabel_2_1.setIcon(new ImageIcon(img_help));
+		lblNewLabel_2_1.setBounds(477, 280, 20, 20);
+		add(lblNewLabel_2_1);
+
 		controller.loadDataAlgorithms();
 
 	}
-	
+
 	public void setResult(String mess) {
 		taResult.setText(mess);
 	}

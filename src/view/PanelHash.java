@@ -12,11 +12,15 @@ import java.security.NoSuchAlgorithmException;
 
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 import java.awt.Component;
 import javax.swing.JTabbedPane;
 import java.awt.LayoutManager;
@@ -26,6 +30,8 @@ import controller.HashController;
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelHash extends JPanel {
 	private JTextArea tarResult;
@@ -34,7 +40,7 @@ public class PanelHash extends JPanel {
 	private JComboBox cbMode;
 
 	public PanelHash() {
-		 this.controller = new HashController(this);
+		this.controller = new HashController(this);
 		this.setBackground(UIManager.getColor("Button.disabledShadow"));
 		this.setBounds(0, 0, 507, 311);
 		this.setLayout(null);
@@ -96,7 +102,7 @@ public class PanelHash extends JPanel {
 		final JButton btnNewButton_2 = new JButton("Start");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String message = taInput.getText().toString().trim();
 				try {
 					tarResult.setText(controller.hashMD5(message));
@@ -109,13 +115,31 @@ public class PanelHash extends JPanel {
 					tarResult.setText("error");
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		// btnNewButton_2.addActionListener((ActionListener)new
 		// PanelHash.PanelHash$3(this));
 		btnNewButton_2.setBounds(88, 104, 89, 23);
 		panel_4.add(btnNewButton_2);
+
+		JLabel lblNewLabel_2 = new JLabel();
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/6.6.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+
+			}
+		});
+		Image img_help = new ImageIcon(MainView.class.getResource("/asset/help.jpg")).getImage()
+				.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		lblNewLabel_2.setBounds(225, 137, 20, 20);
+		lblNewLabel_2.setIcon(new ImageIcon(img_help));
+		panel_4.add(lblNewLabel_2);
 		final JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(null, "Result", 4, 2, null, null));
 		panel_5.setBackground(Color.WHITE);
@@ -157,9 +181,9 @@ public class PanelHash extends JPanel {
 		final JButton btnOpen_1 = new JButton("Open");
 		btnOpen_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				controller.openDialogFile_2();
-				
+
 			}
 		});
 		// btnOpen_1.addActionListener((ActionListener)new PanelHash.PanelHash$4(this));
@@ -168,7 +192,7 @@ public class PanelHash extends JPanel {
 		final JButton btnNewButton_1_1 = new JButton("Save");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String message = tarResult_1.getText().toString().trim();
 				try {
 					controller.saveDialogFile(message);
@@ -176,7 +200,7 @@ public class PanelHash extends JPanel {
 					// TODO Auto-generated catch block
 					controller.openDialogError("Lỗi lưu file");
 				}
-				
+
 			}
 		});
 		// btnNewButton_1_1.addActionListener((ActionListener)new
@@ -186,12 +210,12 @@ public class PanelHash extends JPanel {
 		final JButton btnNewButton_2_1 = new JButton("Start");
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
+
+
 				String message = taInput.getText().toString().trim();
-				
+
 				String mode = cbMode.getSelectedItem().toString().trim();
-				
+
 				try {
 					tarResult_1.setText(controller.hashSHA(message,mode));
 				} catch (NoSuchAlgorithmException e1) {
@@ -203,13 +227,30 @@ public class PanelHash extends JPanel {
 					tarResult_1.setText("error");
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 		// btnNewButton_2_1.addActionListener((ActionListener)new
 		// PanelHash.PanelHash$6(this, taInput_1));
 		btnNewButton_2_1.setBounds(88, 104, 89, 23);
 		panel_5_1.add(btnNewButton_2_1);
+
+		JLabel lblNewLabel_2_1 = new JLabel();
+		lblNewLabel_2_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/7.7.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+
+			}
+		});
+		lblNewLabel_2_1.setIcon(new ImageIcon(img_help));
+		lblNewLabel_2_1.setBounds(225, 137, 20, 20);
+		panel_5_1.add(lblNewLabel_2_1);
 		final JPanel panel_4_1 = new JPanel();
 		panel_4_1.setLayout(null);
 		panel_4_1.setBorder(new TitledBorder(null, "Result", 4, 2, null, null));

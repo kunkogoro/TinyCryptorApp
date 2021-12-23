@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import modelSymmetric.AlgorithmsItem;
 import java.util.List;
 import java.awt.event.ActionListener;
@@ -10,6 +12,8 @@ import java.io.IOException;
 import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.LayoutManager;
@@ -20,6 +24,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelGenKeyPair extends JPanel {
 	private JComboBox cbxKeySize;
@@ -29,6 +35,9 @@ public class PanelGenKeyPair extends JPanel {
 	private JButton btnSavePrivate;
 	private JButton btnSavePublic;
 	private GenKeyController controller;
+	private JLabel lblNewLabel_2;
+	private Image img_help = new ImageIcon(MainView.class.getResource("/asset/help.jpg")).getImage()
+			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
 	public PanelGenKeyPair() {
 		this.controller = new GenKeyController(this);
@@ -52,10 +61,10 @@ public class PanelGenKeyPair extends JPanel {
 		this.cbxAlgorithm = new JComboBox();
 		cbxAlgorithm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				mode = String.valueOf(cbxAlgorithm.getSelectedItem());
 				controller.loadDataAllOption(mode);
-				
+
 			}
 		});
 		this.cbxAlgorithm.setBounds(107, 19, 198, 22);
@@ -66,11 +75,11 @@ public class PanelGenKeyPair extends JPanel {
 		this.btnStart = new JButton("Run");
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String algorthims = (String) cbxAlgorithm.getSelectedItem();
 				String keySize = (String) cbxKeySize.getSelectedItem();
 				controller.createGenKeyPair(algorthims, keySize);
-				
+
 			}
 		});
 		this.btnStart.setBounds(46, 195, 89, 23);
@@ -78,7 +87,7 @@ public class PanelGenKeyPair extends JPanel {
 		this.btnSavePublic = new JButton("Public Key");
 		btnSavePublic.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String mode = btnSavePublic.getText();
 				try {
 					controller.saveDialogFile(mode);
@@ -86,7 +95,7 @@ public class PanelGenKeyPair extends JPanel {
 					// TODO Auto-generated catch block
 					controller.openDialogError("Lỗi mở file");
 				}
-				
+
 			}
 		});
 		this.btnSavePublic.setBounds(169, 195, 111, 23);
@@ -105,6 +114,25 @@ public class PanelGenKeyPair extends JPanel {
 		});
 		this.btnSavePrivate.setBounds(314, 195, 111, 23);
 		this.add(this.btnSavePrivate);
+
+		lblNewLabel_2 = new JLabel();
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/5.5.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+
+			}
+		});
+		Image img_help = new ImageIcon(MainView.class.getResource("/asset/help.jpg")).getImage()
+				.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+		lblNewLabel_2.setIcon(new ImageIcon(img_help));
+		lblNewLabel_2.setBounds(477, 280, 20, 20);
+		add(lblNewLabel_2);
 		this.controller.loadDataAlgorithms();
 	}
 

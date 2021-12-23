@@ -35,6 +35,12 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import java.awt.Component;
+import java.awt.Label;
+import javax.swing.event.AncestorListener;
+import javax.swing.text.View;
+import javax.swing.event.AncestorEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelSymmetric extends JPanel {
 
@@ -47,9 +53,8 @@ public class PanelSymmetric extends JPanel {
 	private String mode = "";
 	private String modeFile = "";
 
-	/**
-	 * Create the panel.
-	 */
+	private Image img_help = new ImageIcon(MainView.class.getResource("/asset/help.jpg")).getImage()
+			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
 	private JComboBox cbxAlgorithm;
 	private JComboBox cbxKeySize;
@@ -324,6 +329,25 @@ public class PanelSymmetric extends JPanel {
 		rdoBouncycastlt.setBounds(20, 256, 117, 23);
 		panelString.add(rdoBouncycastlt);
 
+		JLabel lblNewLabel_3 = new JLabel();
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/1.1.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+//				.dispose();
+
+			}
+		});
+
+		lblNewLabel_3.setIcon(new ImageIcon(img_help));
+		lblNewLabel_3.setBounds(467, 258, 20, 20);
+		panelString.add(lblNewLabel_3);
+
 		JPanel panelFile = new JPanel();
 		panelFile.setBounds(67, 11, 59, 21);
 		panelFile.setBackground(new Color(255, 255, 255));
@@ -380,7 +404,6 @@ public class PanelSymmetric extends JPanel {
 				} else {
 					controller.loadDataAllOption(mode, "normal");
 				}
-
 
 			}
 		});
@@ -496,10 +519,10 @@ public class PanelSymmetric extends JPanel {
 					}
 
 					if (opti == "Encrypt") {
-						controller.encryptFile(algorithms, mode, padding,lib);
+						controller.encryptFile(algorithms, mode, padding, lib);
 
 					} else if (opti == "Decrypt") {
-						controller.decryptFile(algorithms, mode, padding,lib);
+						controller.decryptFile(algorithms, mode, padding, lib);
 					}
 
 				} catch (Exception e1) {
@@ -528,6 +551,23 @@ public class PanelSymmetric extends JPanel {
 		rdoBouncycastlt_1.setBackground(Color.WHITE);
 		rdoBouncycastlt_1.setBounds(20, 256, 117, 23);
 		panelFile.add(rdoBouncycastlt_1);
+
+		JLabel lblNewLabel_3_1 = new JLabel();
+		lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/2.2.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+//					.dispose();
+
+			}
+		});
+		lblNewLabel_3_1.setIcon(new ImageIcon(img_help));
+		lblNewLabel_3_1.setBounds(467, 258, 20, 20);
+		panelFile.add(lblNewLabel_3_1);
 
 		controller.loadDataAlgorithms("normal");
 	}

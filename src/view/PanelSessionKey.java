@@ -10,13 +10,18 @@ import modelSymmetric.AlgorithmsItem;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelSessionKey extends JPanel {
 
@@ -26,6 +31,9 @@ public class PanelSessionKey extends JPanel {
 	private SessionKeyController controller = new SessionKeyController(this);
 	private JButton btnStart;
 	private JButton btnSave;
+	private JLabel lblNewLabel_2;
+	private Image img_help = new ImageIcon(MainView.class.getResource("/asset/help.jpg")).getImage()
+			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
 	/**
 	 * Create the panel.
@@ -96,6 +104,21 @@ public class PanelSessionKey extends JPanel {
 		});
 		btnSave.setBounds(320, 198, 89, 23);
 		add(btnSave);
+
+		lblNewLabel_2 = new JLabel();
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/4.4.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+			}
+		});
+		lblNewLabel_2.setIcon(new ImageIcon(img_help));
+		lblNewLabel_2.setBounds(477, 280, 20, 20);
+		add(lblNewLabel_2);
 
 		controller.loadDataAlgorithms();
 

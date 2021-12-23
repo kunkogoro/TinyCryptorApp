@@ -37,18 +37,18 @@ public class MainView extends JFrame {
 	private PanelPBE panelPBE;
 
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainView frame = new MainView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					MainView frame = new MainView();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
@@ -224,6 +224,7 @@ public class MainView extends JFrame {
 		panelHash.setVisible(false);
 		panelPBE.setVisible(false);
 		jpanel.setVisible(true);
+
 
 	}
 	private class PanelButtonMouseAdapter extends MouseAdapter {

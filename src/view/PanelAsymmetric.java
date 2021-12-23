@@ -4,6 +4,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+
 import modelSymmetric.AlgorithmsItem;
 import java.util.List;
 import javax.swing.AbstractButton;
@@ -13,6 +15,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.LayoutManager;
@@ -24,6 +28,8 @@ import controller.AsymmtricController;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PanelAsymmetric extends JPanel {
 	private final ButtonGroup btnGrModel;
@@ -39,6 +45,9 @@ public class PanelAsymmetric extends JPanel {
 	private JButton btnSaveFile;
 	private JButton btnPublicKey;
 	private String mode;
+
+	private Image img_help = new ImageIcon(MainView.class.getResource("/asset/help.jpg")).getImage()
+			.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
 
 	public PanelAsymmetric() {
 		this.btnGrModel = new ButtonGroup();
@@ -118,7 +127,7 @@ public class PanelAsymmetric extends JPanel {
 		final JButton btnStart_1 = new JButton("Run");
 		btnStart_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String opti = "";
 
 				try {
@@ -144,7 +153,7 @@ public class PanelAsymmetric extends JPanel {
 					taMessageStatus.setText("Vui lòng chọn mode phù hợp");
 				}
 
-				
+
 			}
 		});
 
@@ -153,9 +162,9 @@ public class PanelAsymmetric extends JPanel {
 		this.btnPublicKey = new JButton("Public Key");
 		btnPublicKey.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String modekey = btnPublicKey.getText().toString().trim();
-				
+
 				controller.openDialogKey(modekey);
 			}
 		});
@@ -205,6 +214,23 @@ public class PanelAsymmetric extends JPanel {
 		panelModeFile.add(rdoDecrypt_1);
 		this.btnSaveFile.setBounds(424, 41, 76, 23);
 		this.add(this.btnSaveFile);
+
+		JLabel lblNewLabel_3 = new JLabel();
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+
+				Image img_main = new ImageIcon(MainView.class.getResource("/asset/3.3.png")).getImage()
+						.getScaledInstance(600, 328, Image.SCALE_SMOOTH);
+
+				AsymmetricHelp asmm = new AsymmetricHelp(img_main);
+				asmm.setVisible(true);
+			}
+		});
+		lblNewLabel_3.setIcon(new ImageIcon(img_help));
+		lblNewLabel_3.setBounds(472, 283, 20, 20);
+		add(lblNewLabel_3);
 		this.controller.loadDataAlgorithms();
 	}
 
